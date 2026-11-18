@@ -13,12 +13,20 @@ export default {
 
     const url = new URL(request.url);
 
-    if (url.pathname === "/" && request.method === "GET") {
-      return Response.json({
-        success: true,
-        message: "VTS GPS Server is running"
-      }, { headers: cors });
-    }
+    if (url.pathname === "/gps" && request.method === "POST") {
+    const gps = await request.json();
+
+    const id = env.GPS_RELAY.idFromName(gps.vehicle_no);
+    const stub = env.GPS_RELAY.get(id);
+
+    return await stub.fetch("https://gps-relay/broadcast", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(gps)
+    });
+}
 
     if (url.pathname === "/gps" && request.method === "POST") {
       try {
