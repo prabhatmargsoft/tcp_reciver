@@ -1,7 +1,7 @@
 const net = require("net");
 
 const client = net.createConnection({
-    host: "192.168.1.128",
+    host: "https://tcp-reciver.prabhat-yadav.workers.dev",
     port: 5000
 }, () => {
 
