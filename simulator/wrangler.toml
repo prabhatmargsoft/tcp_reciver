@@ -1,0 +1,12 @@
+
+name = "vts-gps-server"
+main = "src/index.js"
+compatibility_date = "2026-11-18"
+
+[[durable_objects.bindings]]
+name = "GPS_RELAY"
+class_name = "GpsRelay"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["GpsRelay"]
