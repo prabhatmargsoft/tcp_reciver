@@ -13,6 +13,36 @@ export default {
       });
     }
 
+
+    // Uninstall Block API - POST
+   console.log("Request URL:", url);
+console.log("Request Path:", url.pathname);
+console.log("Request Method:", request.method);
+    if (url.pathname === "/api/blockUninstall" && request.method === "POST") {
+      try {
+        const body = await request.json();
+
+        if (typeof body.blockUninstall !== "boolean") {
+          return Response.json({
+            success: false,
+            message: "blockUninstall must be true or false"
+          }, { status: 400 });
+        }
+
+        return Response.json({
+          success: true,
+          blockUninstall: body.blockUninstall
+        });
+
+      } catch (error) {
+        return Response.json({
+          success: false,
+          message: "Invalid JSON"
+        }, { status: 400 });
+      }
+    }
+
+
     // WebSocket connection from Flutter
     if (url.pathname === "/ws") {
       const vehicleNo = url.searchParams.get("vehicle_no");
@@ -24,7 +54,7 @@ export default {
         }, { status: 400 });
       }
 
-      if (request.headers.get("Upgrade") !== "websocket") {
+      if (request.headers.get("Upgrade")?.toLowerCase() !== "websocket") {
         return new Response("WebSocket upgrade required", {
           status: 426
         });
@@ -93,7 +123,6 @@ export class GpsRelay extends DurableObject {
     // WebSocket connection
     if (url.pathname === "/ws") {
       const pair = new WebSocketPair();
-
       const client = pair[0];
       const server = pair[1];
 
