@@ -1,19 +1,15 @@
-
 exports.blockUninstall = async (req, res) => {
     try {
-        const { blockUninstall, deviceId } = req.body;
+        console.log("Uninstall API called:", req.body);
 
-        if (
-            typeof blockUninstall !== "boolean" ||
-            !deviceId
-        ) {
+        const { deviceId, blockUninstall } = req.body;
+
+        if (!deviceId || typeof blockUninstall !== "boolean") {
             return res.status(400).json({
                 success: false,
                 message: "deviceId and blockUninstall are required"
             });
         }
-
-        // TODO: Save the setting in your database.
 
         return res.status(200).json({
             success: true,
@@ -23,11 +19,11 @@ exports.blockUninstall = async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Uninstall API Error:", error);
+        console.error(error);
 
         return res.status(500).json({
             success: false,
-            message: "Internal server error"
+            message: error.message
         });
     }
 };
