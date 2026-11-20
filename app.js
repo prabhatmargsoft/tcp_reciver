@@ -8,8 +8,8 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
     res.send("VTS API Running");
-});
+});  
 
-// app.use("/api", uninstallRouter);
+ app.use("/api", uninstallRouter);
 
 module.exports = app;
