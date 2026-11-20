@@ -5,43 +5,13 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Health check
+    // Health Check
     if (url.pathname === "/") {
       return Response.json({
         success: true,
         message: "VTS GPS Server is running"
       });
     }
-
-
-    // Uninstall Block API - POST
-   console.log("Request URL:", url);
-console.log("Request Path:", url.pathname);
-console.log("Request Method:", request.method);
-    if (url.pathname === "/api/blockUninstall" && request.method === "POST") {
-      try {
-        const body = await request.json();
-
-        if (typeof body.blockUninstall !== "boolean") {
-          return Response.json({
-            success: false,
-            message: "blockUninstall must be true or false"
-          }, { status: 400 });
-        }
-
-        return Response.json({
-          success: true,
-          blockUninstall: body.blockUninstall
-        });
-
-      } catch (error) {
-        return Response.json({
-          success: false,
-          message: "Invalid JSON"
-        }, { status: 400 });
-      }
-    }
-
 
     // WebSocket connection from Flutter
     if (url.pathname === "/ws") {

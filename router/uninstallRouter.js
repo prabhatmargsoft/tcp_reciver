@@ -1,20 +1,12 @@
+
 const express = require("express");
 const router = express.Router();
 
-router.post("/blockUninstall", (req, res) => {
-    const { blockUninstall } = req.body;
+const uninstallController = require("../controller/deviceController");
 
-    if (typeof blockUninstall !== "boolean") {
-        return res.status(400).json({
-            success: false,
-            message: "blockUninstall must be true or false"
-        });
-    }
-
-    return res.json({
-        success: true,
-        blockUninstall: blockUninstall
-    });
-});
+router.post(
+    "/blockUninstall",
+    uninstallController.blockUninstall
+);
 
 module.exports = router;
