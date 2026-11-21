@@ -19,7 +19,7 @@ function gpsHandler(message) {
         console.log("Longitude:", gps.longitude);
         console.log("Speed:", gps.speed);
         console.log("Heading:", gps.heading);
-  console.log("Server Date Time:", serverDateTime);
+        console.log("Server Date Time:", serverDateTime);
 
     } catch (error) {
         console.log("Invalid GPS packet:", error.message);

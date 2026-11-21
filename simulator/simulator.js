@@ -1,8 +1,11 @@
 const net = require("net");
 
+const tcpHost = process.env.TCP_HOST || "127.0.0.1";
+const tcpPort = Number(process.env.TCP_PORT || 5000);
+
 const client = net.createConnection({
-    host: "https://tcp-reciver.prabhat-yadav.workers.dev",
-    port: 5000
+    host: tcpHost,
+    port: tcpPort
 }, () => {
 
     console.log("GPS Device Connected");

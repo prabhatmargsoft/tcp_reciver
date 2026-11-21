@@ -5,13 +5,21 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Health Check
+    // Health check
     if (url.pathname === "/") {
       return Response.json({
         success: true,
         message: "VTS GPS Server is running"
       });
     }
+
+
+    // Uninstall Block API - POST
+   console.log("Request URL:", url);
+console.log("Request Path:", url.pathname);
+console.log("Request Method:", request.method);
+   
+
 
     // WebSocket connection from Flutter
     if (url.pathname === "/ws") {
